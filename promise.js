@@ -1,18 +1,19 @@
 
 
 
-Promise.prototype.all = function (promises){
+Promise.prototype.myAll = function (promises){
     return new Promise((resolve, reject) => {
-        let resolveCount = 0, result = [];
-        for (let i = 0; i < promises.length; i++){
-            promises[i].then(val => {
-                result.push(val);
-                resolveCount++
-                if(result.length === promises.length){
+        const len = promises.length;
+        let result = [], doneCount = 0;
+        for (let i = 0; i < len; i++){
+            Promise.resolve(promises[i]).then((value) => {
+                // 根据索引设置结果，保证数据顺序返回
+                result[i] = value
+                if (++doneCount === len){
                     resolve(result)
                 }
-            }, err => {
-                reject(err)
+            }, (err) => {
+                return reject(err)
             })
         }
     })
@@ -36,6 +37,6 @@ let p3  = new Promise((resolve, reject) => {
     }, 500)
 })
 
-Promise.all([p1, p2, p3]).then(result => {
+Promise.prototype.myAll([p1, p2, p3]).then(result => {
     console.log(result)
 })
