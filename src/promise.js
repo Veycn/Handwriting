@@ -102,15 +102,11 @@ function resolvePromise(promise, x, resolve, reject) {
             let then = x.then
             if (typeof then === 'function') {
                 then.call(x, y => {
-                    if (called) {
-                        return
-                    }
+                    if (called) return;
                     called = true
                     resolvePromise(promise, y, resolve, reject)
                 }, z => {
-                    if (called) {
-                        return
-                    }
+                    if (called) return;
                     called = true
                     reject(z)
                 })
@@ -118,9 +114,7 @@ function resolvePromise(promise, x, resolve, reject) {
                 resolve(x)
             }
         } catch (err) {
-            if (called) {
-                return
-            }
+            if (called) return;
             called = true
             reject(err)
         }

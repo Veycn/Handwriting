@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="div">
+    <ul id="ul">
+        <li id="li">test</li>
+    </ul>
+</div>
+
+<script>
+    document.getElementById('div').addEventListener('click', (e) => {
+        console.log('div')
+        e.stopPropagation()
+    }, true)
+    document.getElementById('ul').addEventListener('click', (e) => {
+        console.log('ul')
+    })
+    document.getElementById('li').addEventListener('click', (e) => {
+        console.log('li')
+    })
+
+
+    var a = 1;
+
+
+    function foo(){
+        console.log(a)
+    }
+
+    function bar(){
+        var a = 2
+        foo()
+    }
+
+    bar()
+</script>
+</body>
+</html>
