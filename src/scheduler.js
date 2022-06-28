@@ -1,19 +1,21 @@
 class Scheduler {
+    result = [];
     constructor(max = 2) {
         this.max = max;
         this.count = 0;
+        this.index = 0;
         this.queue = [];
     }
 
     run() {
         if (!this.queue.length || this.count >= this.max) {
-            return
+            return this.result;
         }
         this.count++
         this.queue.shift()().then(res => {
-
-        }, () => {
-
+            this.result[this.index ++] = res;
+        }, (err) => {
+            this.result[this.index ++] = err;
         }).finally(() => {
             this.count--
             this.run()
@@ -29,15 +31,19 @@ class Scheduler {
             this.run()
         }
     }
+
+    get result(){
+        return this.result;
+    }
 }
 
 
 
 const timeout = time => new Promise(resolve => {
-    setTimeout(resolve, time);
+    setTimeout(resolve, time, time);
 })
 
-const scheduler = new Scheduler();
+const scheduler = new Scheduler(3);
 
 const addTask = (time,order) => {
     scheduler.add(() => timeout(time).then(() => {
@@ -47,13 +53,13 @@ const addTask = (time,order) => {
 }
 
 console.time('1')
-addTask(1000, '1');
+addTask(500, '1');
 console.time('2')
-addTask(5000, '2');
+addTask(200, '2');
 console.time('3')
-addTask(3000, '3');
+addTask(300, '3');
 console.time('4')
-addTask(4000, '4');
+addTask(400, '4');
 
 scheduler.start()
 

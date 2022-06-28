@@ -7,12 +7,12 @@
  * @param args
  * @returns {(function(...[*]): (*))|*}
  */
-function curring(func, ...args){
+function curring(func, ...args) {
     const params = [...args]
-    return function temp (...rest) {
-        if(rest.length === 0){
+    return function temp(...rest) {
+        if (rest.length === 0) {
             return func(...params)
-        }else{
+        } else {
             params.push(...rest)
             return temp
         }
@@ -22,8 +22,8 @@ function curring(func, ...args){
 
 const sum = (...args) => args.reduce((a, b) => a + b, 0)
 
-let currySum = curring(sum, 1,2,3)
+let currySum = curring(sum, 1, 2, 3)
 
-currySum(4)(5)(6)(7)(8,9)
+currySum(4)(5)(6)(7)(8, 9)
 
 console.log(currySum()) // 45
