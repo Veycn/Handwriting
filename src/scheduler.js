@@ -1,5 +1,4 @@
 class Scheduler {
-    result = [];
     constructor(max = 2) {
         this.max = max;
         this.count = 0;
@@ -9,13 +8,13 @@ class Scheduler {
 
     run() {
         if (!this.queue.length || this.count >= this.max) {
-            return this.result;
+            return;
         }
         this.count++
         this.queue.shift()().then(res => {
-            this.result[this.index ++] = res;
+
         }, (err) => {
-            this.result[this.index ++] = err;
+
         }).finally(() => {
             this.count--
             this.run()

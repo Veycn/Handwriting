@@ -20,3 +20,4 @@ let f = () => console.log(1)
 
 let df = debounce(f, 1000)
 
+df()
