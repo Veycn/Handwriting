@@ -23,7 +23,7 @@ const asyncPool = async  (poolLimit, array, iteratorFn) => {
     }
     return Promise.all(resultList);
 }
-async function poll (limit, array, fn) {
+async function pool (limit, array, fn) {
     const result = [];
     const execute = [];
 
@@ -51,7 +51,7 @@ async function poll (limit, array, fn) {
 const timeout = (i) => new Promise(resolve => setTimeout(resolve, i, i));
 
 const main = async () => {
-    const aa = await poll(3, [
+    const aa = await pool(3, [
         10,20,30,40,50,60,60,70,80,1000
     ], timeout)
     console.log(aa)

@@ -27,3 +27,16 @@ let currySum = curring(sum, 1, 2, 3)
 currySum(4)(5)(6)(7)(8, 9)
 
 console.log(currySum()) // 45
+
+
+function curry(func, ...args){
+    const params = [...args];
+    return function temp(...rest){
+        if (rest.length === 0) {
+            return func(...params)
+        } else {
+            params.push(...rest);
+            return temp
+        }
+    }
+}

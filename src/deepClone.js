@@ -37,3 +37,36 @@ function forEach(array, iterator) {
         iterator(array[index], index)
     }
 }
+
+
+function deepClone(target, cloneMap = new WeakMap()) {
+    if (typeof target == null || typeof target !== 'object') {
+        return target;
+    }
+
+    if (cloneMap.get(target)) {
+        return cloneMap.get(target)
+    }
+
+    const isArray = Array.isArray(target);
+    const result = isArray ? [] : {};
+
+    const keys = isArray ? null : Object.keys(target);
+
+    forEach(keys | target, function (value, key) {
+        if (keys) {
+            value = key
+        }
+        result[key] = deepClone(target[key], value);
+    })
+
+    cloneMap.set(target, result);
+    return result;
+}
+
+function forEach(array, iterator) {
+    let index = -1;
+    while (++index < array.length) {
+        iterator(array[index], index)
+    }
+}
