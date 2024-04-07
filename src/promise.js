@@ -110,6 +110,7 @@ function resolvePromise(promise, x, resolve, reject) {
                     called = true
                     reject(z)
                 })
+
             } else {
                 resolve(x)
             }

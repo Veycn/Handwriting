@@ -21,7 +21,22 @@ async function asyncAdd(...nums){
     return asyncAdd(...result);
 }
 
-let a = asyncAdd(1,2,3,4,5,6,7,8,9)
+// let a = asyncAdd(1,2,3,4,5,6,7,8,9)
 
-a.then(val => console.log(val))
+// a.then(val => console.log(val))
+
+
+let nums = [1,2,3,4,5,6,7,8,9,10];
+
+function add (nums){
+    let count = 0;
+    while (nums.length > 1 || this.count > 0) {
+        count ++
+        promisifyAdd(nums.shift(), nums.shift() || 0).then(val => {
+            nums.push(val)
+            count --;
+        })
+    }
+    return nums[0];
+}
 

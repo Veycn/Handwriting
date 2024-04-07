@@ -12,7 +12,7 @@ const asyncPool = async  (poolLimit, array, iteratorFn) => {
                 return executing.splice(executing.indexOf(e), 1);
             });
 
-            executing.push(e);
+            executing.push(e)
 
             if (executing.length >= poolLimit) {
                 console.log(executing)

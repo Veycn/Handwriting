@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <button id="btn">开始</button>
+  <button id="pause">中断</button>
+  <script src="../src/任务中断和恢复.js"></script>
+  <script>
+
+  const tasks = [1,2,3,4,5].map((i) => {
+    return function () {
+      setTimeout(() => new Promise((resolve) => resolve(i)), 2000);
+    }
+  })
+
+  const scheduler = processTasks(tasks);
+
+  document.querySelector('#btn').addEventListener('click', scheduler.start);
+  document.querySelector('#pause').addEventListener('click', scheduler.pause);
+
+  </script>
+</body>
+</html>

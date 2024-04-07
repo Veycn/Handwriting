@@ -24,4 +24,4 @@ const lazyLoad = (function (){
 })()
 
 
-document.addEventListener('scroll', lazyLoad)
+document.addEventListener('scroll', throttle(lazyLoad))

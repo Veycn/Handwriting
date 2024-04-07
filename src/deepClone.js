@@ -70,3 +70,9 @@ function forEach(array, iterator) {
         iterator(array[index], index)
     }
 }
+
+
+
+function deepClone(target){
+    
+}

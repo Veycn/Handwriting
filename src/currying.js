@@ -40,3 +40,16 @@ function curry(func, ...args){
         }
     }
 }
+
+
+function curry(fn) {
+    let len = fn.length, params = [];
+    return function temp(...args){
+        params.push(...args)
+        if (args.length < len) {
+            return temp
+        } else {
+            return fn.call(null, ...params)
+        }
+    }
+}
